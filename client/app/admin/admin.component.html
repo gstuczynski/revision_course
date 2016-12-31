@@ -1,0 +1,43 @@
+<div class="container">
+
+  <hr>
+  <h3>ENG</h3>
+<div class="form-group">
+  <label class="control-label" for="inputLarge">Po angielsku</label>
+  <input class="form-control input-lg" type="text" id="engPhrase" [(ngModel)]="engPhrase">
+  <label class="control-label" for="inputLarge">Po polsku</label>
+  <input class="form-control input-lg" type="text" id="plPhrase" [(ngModel)]="plPhrase">
+  <label class="control-label" for="inputLarge">Dodatkowy opis</label>
+  <input class="form-control input-lg" type="text" id="description" [(ngModel)]="description">
+   <button type="submit" class="btn btn-primary" (click)="addItem()">Add Item</button>
+</div>
+
+</div>
+
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Lp.</th>
+      <th>Po angielsku</th>
+      <th>Po polsku</th>
+      <th>Opis</th>
+      <th>Data dodania</th>   
+      <th></th>   
+    </tr>
+  </thead>
+  <tbody>
+      
+      <tr *ngFor="let item of items; let i = index">
+        <!--  <li *ngFor="let item of items">-->
+      <td>{{i+1}}</td>
+      <td>{{item.engPhrase}}</td>
+      <td>{{item.plPhrase}}</td>
+     <td>{{item.description}}</td>
+      <td>{{item.creationDate}}</td>
+      <td><button class="btn btn-success" (click) = "removeItem(item._id)">Usuń</button></td>
+       <!-- </li>-->
+    </tr>
+      </tbody>
+</table> 
+

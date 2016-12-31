@@ -1,0 +1,17 @@
+<div class="container">
+
+  <hr>
+  <h3>ENG</h3>
+  <input type="text" name="engPhrase" [(ngModel)]="engPhrase" />
+  <h3>POL</h3>
+  <input type="text" name="plPhrase" [(ngModel)]="plPhrase" />
+  <h3>DESC</h3>
+  <input type="text" name="description" [(ngModel)]="description" />
+  <button (click)="addItem()">Add Item</button>
+
+    <li *ngFor="let item of items">
+    {{item.engPhrase}} {{item.plPhrase}} {{item.description}} {{item.creationDate}}
+    <button (click) = "removeItem(item._id)">Delete Item</button>
+    </li>
+
+</div>

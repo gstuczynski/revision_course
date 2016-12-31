@@ -1,0 +1,8 @@
+<div *ngFor="let item of items; let isFirst = first">
+<div class="jumbotron" *ngIf=isFirst>
+
+  <h1>{{ item.engPhrase }}</h1>
+  <p>{{item.descripton}}</p>
+  <p><a class="btn btn-primary btn-lg" (click) = "knew(item._id)">Wiem</a></p>
+</div>
+</div>
