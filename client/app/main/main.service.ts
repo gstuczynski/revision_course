@@ -13,4 +13,12 @@ constructor(private http: Http){}
     .map(res =>res.json());
 }
 
+updateItem(item){
+  console.log("servis"+item.nextRepeat);
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.put("/api/items/"+item.id, JSON.stringify(item), {headers: headers})
+      .map(response => response.json());
+}
+
 }

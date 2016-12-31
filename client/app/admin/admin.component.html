@@ -23,6 +23,7 @@
       <th>Po polsku</th>
       <th>Opis</th>
       <th>Data dodania</th>   
+          <th>Następna powtótka</th> 
       <th></th>   
     </tr>
   </thead>
@@ -35,6 +36,7 @@
       <td>{{item.plPhrase}}</td>
      <td>{{item.description}}</td>
       <td>{{item.creationDate}}</td>
+      <td>{{item.nextRepeat}}</td>
       <td><button class="btn btn-success" (click) = "removeItem(item._id)">Usuń</button></td>
        <!-- </li>-->
     </tr>

@@ -1,8 +1,22 @@
+<div class="jumbotron">
 <div *ngFor="let item of items; let isFirst = first">
-<div class="jumbotron" *ngIf=isFirst>
-
+<div  *ngIf=isFirst>
   <h1>{{ item.engPhrase }}</h1>
-  <p>{{item.descripton}}</p>
-  <p><a class="btn btn-primary btn-lg" (click) = "knew(item._id)">Wiem</a></p>
+  <p><a class="btn btn-primary btn-lg" (click) = "showAnswear()">Pokaż odpowiedź</a></p>
 </div>
+</div>
+<div *ngIf="answered">
+
+  <div class="alert alert-dismissible alert-success">
+  <strong>{{ items[0].plPhrase }}</strong>
+  </div>
+  <div class="alert alert-dismissible alert-info">
+      <strong>{{ items[0].description }}</strong>
+</div>
+  <p>
+    <a class="btn btn-primary btn-lg" (click) = "knew(items[0], 1)">Wiem</a>
+      <a class="btn btn-primary btn-lg" (click) = "knew(items[0]._id,2)">Prawie</a>
+      <a class="btn btn-primary btn-lg" (click) = "knew(items[0]._id,3)">Nie wiem</a>
+  </p>
+  </div>
 </div>

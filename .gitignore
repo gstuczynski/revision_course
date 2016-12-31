@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 .idea
 /node_modules
 jspm_packages
@@ -12,4 +12,4 @@ _test-output
 _temp
 =======
 node_modules/
->>>>>>> 58c6724edea466dbd6d81d241a0b784c09e096e4
+

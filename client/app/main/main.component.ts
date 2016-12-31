@@ -12,6 +12,8 @@ export class MainComponent  {
 
 
 items: Array<any> = [];
+answered: boolean = false;
+item:{};
 
 
 
@@ -21,9 +23,22 @@ items: Array<any> = [];
     })
 }
 
-knew = function(id){
-this.items.shift();
 
+showAnswear = function(){
+this.answered = true;
+}
+
+
+knew = function(item, nextDay:number){
+
+//var updItem = item;
+
+var date = new Date();
+//item.creationDate.setDate(date.getDate()+5)
+item.nextRepeat = new Date();
+console.log(item.nextRepeat);
+this.mainService.updateItem(item);
+this.items.shift();
 }
   
 

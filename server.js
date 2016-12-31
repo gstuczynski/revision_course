@@ -1,9 +1,8 @@
 const PORT = 3000 || process.env.PORT;
-<<<<<<< HEAD
+
 const DB = "mongodb://localhost/pr3";
-=======
-const DB = "mongodb://localhost/personalRepetition";
->>>>>>> 58c6724edea466dbd6d81d241a0b784c09e096e4
+
+
 
 var mongoose = require('mongoose');
 var express = require('express');
@@ -13,11 +12,11 @@ var morgan = require('morgan');
 var path = require('path');
 
 var mainRouter = require('./routes/index');
-<<<<<<< HEAD
+
 var apiRouter = require('./routes/api');
-=======
+
 var apiRouter = require('./routes/api')
->>>>>>> 58c6724edea466dbd6d81d241a0b784c09e096e4
+
 
 //engine server
 var app = express();

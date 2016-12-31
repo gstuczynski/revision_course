@@ -42,7 +42,42 @@ router.delete('/items/:id', function(require, response){
   })
 });
 
-<<<<<<< HEAD
+router.put('/items/:id', function(require, response){
+  console.log(req.body+"z upadejst")
+  var item = req.body;
+  var updItem = {};
+  if(item.engPhrase){
+    updItem.engPhrase = item.engPhrase;
+  }
+  if(item.plPhrase){
+    updItem.plPhrase = item.plPhrase;
+  }
+  if(item.engPhrase){
+    updItem.description = item.description;
+  }
+    if(item.creationDate){
+    updItem.creationDate = item.creationDate;
+  }
+  if(item.nextRepeat){
+    updItem.nextRepeat = item.nextRepeat;
+    console.log("updajtuje date");
+  }
+
+  if(updItem){
+    var id = require.params.id;
+    Model.update({_id: id},updItem, function(err, resource){
+      if(err){
+        return response.send(err);
+      }else{
+        return response.json(resource);
+      }
+    })
+
+  }
+
+
+});
+
 
 /*
 jednak logike wyboru powtorek przenoszę do MainService
@@ -60,6 +95,4 @@ Model.find({"created_on": {"$gte": new Date(2016, 12, 19), "$lt": new Date(2016,
 });
 */
 
-=======
->>>>>>> 58c6724edea466dbd6d81d241a0b784c09e096e4
 module.exports = router;
