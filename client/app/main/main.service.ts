@@ -9,15 +9,17 @@ export class MainService{
 constructor(private http: Http){}
 
   getItems(){
-  return this.http.get('/api/item')
+  return this.http.get('/api/itemsToday')
     .map(res =>res.json());
 }
 
 updateItem(item){
-  console.log("servis"+item.nextRepeat);
+
+
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.put("/api/items/"+item.id, JSON.stringify(item), {headers: headers})
+    
+    return this.http.put("/api/itemup/"+item._id, JSON.stringify(item), {headers: headers})
       .map(response => response.json());
 }
 

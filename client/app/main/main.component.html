@@ -3,6 +3,7 @@
 <div  *ngIf=isFirst>
   <h1>{{ item.engPhrase }}</h1>
   <p><a class="btn btn-primary btn-lg" (click) = "showAnswear()">Pokaż odpowiedź</a></p>
+    <p><a class="btn btn-primary btn-lg" (click) = "speak()">Czytaj</a></p>
 </div>
 </div>
 <div *ngIf="answered">
@@ -14,9 +15,17 @@
       <strong>{{ items[0].description }}</strong>
 </div>
   <p>
-    <a class="btn btn-primary btn-lg" (click) = "knew(items[0], 1)">Wiem</a>
-      <a class="btn btn-primary btn-lg" (click) = "knew(items[0]._id,2)">Prawie</a>
-      <a class="btn btn-primary btn-lg" (click) = "knew(items[0]._id,3)">Nie wiem</a>
+    <a class="btn btn-primary btn-lg" (click) = "setNextRepeat(items[0], 10)">Wiem</a>
+      <a class="btn btn-primary btn-lg" (click) = "setNextRepeat(items[0],5)">Prawie</a>
+      <a class="btn btn-primary btn-lg" (click) = "setNextRepeat(items[0],1)">Nie wiem</a>
   </p>
   </div>
 </div>
+=
+      <label for="select" class="col-lg-2 control-label">Selects</label>
+      <div class="col-lg-10">
+        <select class="form-control" id="select" (change)="onChangeVoice($event.target.value)">
+          <option *ngFor="let voice of voices; let i = index">
+            {{voice.name}}</option>
+        </select> 
+        </div>

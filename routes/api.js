@@ -20,7 +20,7 @@ router.post('/item', function(require, response){
 
 
 
-router.get('/item', function(require, response){
+router.get('/items', function(require, response){
   Model.find({}, function(err, resource){
     if(err){
       response.send(err).status(404);
@@ -31,7 +31,7 @@ router.get('/item', function(require, response){
 });
 
 
-router.delete('/items/:id', function(require, response){
+router.delete('/item/:id', function(require, response){
   var id = require.params.id;
   Model.remove({_id: id}, function(err, resource){
     if(err){
@@ -42,9 +42,11 @@ router.delete('/items/:id', function(require, response){
   })
 });
 
-router.put('/items/:id', function(require, response){
-  console.log(req.body+"z upadejst")
-  var item = req.body;
+
+
+router.put('/itemup/:id', function(require, response){
+  var item = require.body;
+  console.log("api"+item);
   var updItem = {};
   if(item.engPhrase){
     updItem.engPhrase = item.engPhrase;
@@ -77,6 +79,25 @@ router.put('/items/:id', function(require, response){
 
 
 });
+
+router.get('/itemsToday', function(require, response){
+var start = new Date();
+start.setHours(0,0,0,0);
+
+var end = new Date();
+end.setHours(23,59,59,999);
+
+  Model.find({nextRepeat: {$gte: start, $lt: end}}, function(err, resource){
+    if(err){
+      response.send(err).status(404);
+    }else{
+      response.send(resource).status(200);
+    }
+  });
+});
+
+
+
 
 
 /*

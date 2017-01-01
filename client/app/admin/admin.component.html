@@ -1,3 +1,4 @@
+
 <div class="container">
 
   <hr>
@@ -9,7 +10,9 @@
   <input class="form-control input-lg" type="text" id="plPhrase" [(ngModel)]="plPhrase">
   <label class="control-label" for="inputLarge">Dodatkowy opis</label>
   <input class="form-control input-lg" type="text" id="description" [(ngModel)]="description">
-   <button type="submit" class="btn btn-primary" (click)="addItem()">Add Item</button>
+<input type="date" [(ngModel)]="nextRepeat" id="nextRepeat"/>
+
+   <button type="submit" class="btn btn-primary" (click)="addItem()">Zastosuj</button>
 </div>
 
 </div>
@@ -21,8 +24,7 @@
       <th>Lp.</th>
       <th>Po angielsku</th>
       <th>Po polsku</th>
-      <th>Opis</th>
-      <th>Data dodania</th>   
+      <th>Opis</th> 
           <th>Następna powtótka</th> 
       <th></th>   
     </tr>
@@ -35,8 +37,9 @@
       <td>{{item.engPhrase}}</td>
       <td>{{item.plPhrase}}</td>
      <td>{{item.description}}</td>
-      <td>{{item.creationDate}}</td>
       <td>{{item.nextRepeat}}</td>
+     <!-- <td><input type="datetime-local" [(ngModel)]="item.nextRepeat" value={{item.nextRepeat}} /></td>-->
+      <td><button class="btn btn-success" (click) = "editItem(item)">Edytuj</button></td>
       <td><button class="btn btn-success" (click) = "removeItem(item._id)">Usuń</button></td>
        <!-- </li>-->
     </tr>

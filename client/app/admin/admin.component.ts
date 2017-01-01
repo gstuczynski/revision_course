@@ -15,6 +15,8 @@ engPhrase: string;
 plPhrase: string;
 description: string;
 creationDate: Date;
+id:any;
+nextRepeat: Date;
 
   constructor(private adminService: AdminService) {
     adminService.getItems().subscribe(res => {
@@ -25,13 +27,29 @@ creationDate: Date;
     var item = {
       engPhrase: this.engPhrase,
       plPhrase: this.plPhrase,
-      description: this.description
-
+      description: this.description,
+      nextRepeat: this.nextRepeat
     }
+
+    console.log("nr: "+this.nextRepeat);
+    // jezeli jest id to znaczy ze jestm w trybie edycji i uruchamian serwis
+    //do update, przeciwnie instert do bazy
+    if(this.id){
+      console.log("wlaz w update");
+      
+      item._id = this.id   
+      this.adminService.updateItem(item).subscribe(data => {
+      console.log(data)
+    });
+  }else{
+
+
+
     this.adminService.addItem(item).subscribe(data => {
       console.log(data);
       this.items.push(item);
     })
+  }
   }
 
 
@@ -41,7 +59,12 @@ removeItem(id){
     console.log("delete "+data)
   })
 }
-
+editItem(item){
+this.engPhrase = item.engPhrase;
+this.plPhrase = item.plPhrase;
+this.description = item.description;
+this.id = item._id;
+}
 
 
 
