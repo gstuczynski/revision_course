@@ -1,6 +1,8 @@
 const PORT = 3000 || process.env.PORT;
 
-const DB = "mongodb://localhost/pr3";
+//const DB = "mongodb://localhost/pr3";
+const conf = require("./conf");
+const DB = conf.database;
 
 
 
@@ -9,13 +11,12 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var morgan = require('morgan');
-var path = require('path');
+
 
 var mainRouter = require('./routes/index');
 
 var apiRouter = require('./routes/api');
 
-var apiRouter = require('./routes/api')
 
 
 //engine server
@@ -28,17 +29,6 @@ app.use(bodyParser.urlencoded({ extended : true}));
 app.use('/', mainRouter);
 app.use('/api', apiRouter)
 
-//
-
-//db connect
-mongoose.connect(DB, function(err){
-  if(err){
-    return err;
-  }else{
-    console.log("Successfully connected to "+DB);
-  }
-});
-
 //view engine
 app.set('views', __dirname +'/client');
 app.set('view engine', 'ejs');
@@ -46,6 +36,20 @@ app.engine('html', require('ejs').renderFile);
 
 //set static folder
 app.use(express.static(path.join(__dirname,'client')));
+
+
+
+
+//db connect
+mongoose.connect(DB, function(err){
+  if(err){
+    console.log(err);
+    return err;
+  }else{
+    console.log("Successfully connected to "+DB);
+  }
+});
+
 
 app.listen(PORT, function(){
   console.log('Listening on port: '+ PORT);

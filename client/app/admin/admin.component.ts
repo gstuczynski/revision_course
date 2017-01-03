@@ -24,6 +24,11 @@ nextRepeat: Date;
     })
 }
   addItem() {
+    if(!this.nextRepeat || this.nextRepeat == undefined){
+      this.nextRepeat = new Date();
+      console.log("if "+this.nextRepeat)
+    }
+
     var item = {
       engPhrase: this.engPhrase,
       plPhrase: this.plPhrase,

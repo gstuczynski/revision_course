@@ -13,7 +13,7 @@ constructor(private http: Http){}
     .map(res =>res.json());
 }
 
-updateItem(item){
+updateItem(item:any){
 
 
     var headers = new Headers();

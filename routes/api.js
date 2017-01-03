@@ -7,6 +7,7 @@ var Model = require('../models/item.js')
 
 //add item to db
 router.post('/item', function(require, response){
+  console.log(require.body)
   var item = new Model(require.body);
   item.save(function(err, resource){
     if(err){

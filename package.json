@@ -1,9 +1,6 @@
 {
-<<<<<<< HEAD
-  "name": "pr3",
-=======
-  "name": "personal_repetition",
->>>>>>> 58c6724edea466dbd6d81d241a0b784c09e096e4
+
+  "name": "revision_course",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",

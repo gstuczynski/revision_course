@@ -46,6 +46,7 @@ d.setDate(d.getDate(d)+nextDay);
 item.nextRepeat = d;
 this.mainService.updateItem(item).subscribe(data =>{});
 this.items.shift();
+this.answered = false;
 }
   
 speak(): void {
