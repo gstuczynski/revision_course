@@ -32,7 +32,7 @@ ngOnInit(){
     this.adminService.getRepeat().subscribe(res => {
       for(let r of res){
         this.repeatArr.push(new Repeat(r.engPhrase, r.plPhrase, r.description,
-                        r._id, r.plAnsCount, r.engAnsCount))
+                        r._id, r.plAnsCountToNext, r.engAnsCountToNext))
       }
     })
 this.currRepeat = new Repeat("","","");

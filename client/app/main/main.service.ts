@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Http, Headers } from '@angular/http';
+import {Http, Headers,Response } from '@angular/http';
 import 'rxjs/add/operator/map';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 
@@ -17,14 +19,28 @@ constructor(private http: Http){}
 
 
 
-updateItem(rep:any,id:any){
+updateItem(id:any,rep:any){
 
+console.log("serwis:")
+console.log(rep)
 
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    
-    return this.http.put("/api/itemup/"+item._id, JSON.stringify(item), {headers: headers})
-      .map(response => response.json());
+    var url = "/api/itemupAfterAnsw/"+id;
+   //var url =  "/api/itemup/"+id
+    console.log(url)
+//JSON.stringify(rep)
+    return this.http.put(url,rep , {headers: headers})
+            .map(res =>
+            console.log(res))
+              .catch(this.handleError);
 }
 
+ public handleError(error: Response) {
+    console.error(error);
+    console.log(error.json().error)
+    return Observable.throw(error.json().error || 'Server error');
+  }
 }
+
+

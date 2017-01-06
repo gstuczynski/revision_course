@@ -23,8 +23,8 @@
       <th>Po angielsku</th>
       <th>Po polsku</th>
       <th>Opis</th> 
-          <th>Następna powtótka</th> 
       <th></th>   
+      <th></th> 
     </tr>
   </thead>
   <tbody>
@@ -32,12 +32,9 @@
       <tr *ngFor="let r of repeatArr; let i = index">
         <!--  <li *ngFor="let item of items">-->
       <td>{{i+1}}</td>
-      <td contenteditable>{{r.engPhrase}}</td>
-      <td contenteditable>{{r.engAnsCount}}</td>
-      <td contenteditable>{{r.plPhrase}}</td>
-      <td contenteditable>{{r.plAnsCount}}</td>
+      <td contenteditable>{{r.engPhrase}}({{r.engAnsCountToNext}})</td>
+      <td contenteditable>{{r.plPhrase}}({{r.plAnsCountToNext}})</td>
       <td contenteditable>{{r.description}}</td>
-      <td contenteditable>{{r.nextRepeat}}</td>
      <!-- <td><input type="datetime-local" [(ngModel)]="item.nextRepeat" value={{item.nextRepeat}} /></td>-->
       <td><button class="btn btn-success" (click) = "editRepeat(r)">Edytuj</button></td>
       <td><button class="btn btn-success" (click) = "removeRepeat(r)">Usuń</button></td>

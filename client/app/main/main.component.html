@@ -1,22 +1,22 @@
 <div class="jumbotron">
 
 
-  <h1>{{ currRepeat.repeat }}</h1>
+  <h1 *ngIf="currRepeat">{{ currRepeat.repeat }}</h1>
   <p><a class="btn btn-primary btn-lg" (click) = "showAnswear()">Pokaż odpowiedź</a></p>
     <p><a class="btn btn-primary btn-lg" (click) = "speak()">Czytaj</a></p>
 
 
 <div *ngIf="answered">
   <div class="alert alert-dismissible alert-success">
-  <strong>{{ currRepeat.plPhrase }}</strong>
+  <strong>{{ currRepeat.answear }}</strong>
   </div>
   <div class="alert alert-dismissible alert-info">
       <strong>{{ currRepeat.description }}</strong>
 </div>
   <p>
-    <a class="btn btn-primary btn-lg" (click) = "setNextRepeat(currRepeat, 6)">Wiem</a>
-      <a class="btn btn-primary btn-lg" (click) = "setNextRepeat(currRepeat,3)">Prawie</a>
-      <a class="btn btn-primary btn-lg" (click) = "setNextRepeat(currRepeat,0)">Nie wiem</a>
+    <a class="btn btn-primary btn-lg" (click) = "UpdateAndSetNext('known')">Wiem</a>
+      <a class="btn btn-primary btn-lg" (click) = "UpdateAndSetNext(almost)">Prawie</a>
+      <a class="btn btn-primary btn-lg" (click) = "UpdateAndSetNext(no)">Nie wiem</a>
   </p>
 </div>
 </div>
@@ -28,3 +28,5 @@
             {{voice.name}}</option>
         </select> 
         </div>
+
+{{currRepeat | json}}

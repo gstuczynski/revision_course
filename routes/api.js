@@ -44,7 +44,26 @@ router.delete('/item/:id', function(require, response){
   })
 });
 
+router.put('/itemupAfterAnsw/:id', function(require, response){
+  var item = require.body;
+  console.log(item);
 
+
+  if(item){
+    var id = require.params.id;
+    Model.update({_id: id},item, function(err,affected ,resource){
+      if(err){
+        return response.send(err);
+      }else{
+        console.log(resource);
+        return response.json(resource);
+      }
+    })
+
+  }
+
+
+});
 
 router.put('/itemup/:id', function(require, response){
   var item = require.body;
@@ -106,7 +125,7 @@ router.post('/passwd', function(require, response){
 
 router.get('/itemsToday', function(require, response){
   Model.find({}, function(err, resource){
- // Model.find({$or: [{plAnsCount: 0}, {engAnsCount: 0}]}, function(err, resource){
+  //Model.find({$or: [{plAnsCountToNext: 0}, {engAnsCountToNext: 0}]}, function(err, resource){
     if(err){
       response.send(err).status(404);
     }else{
