@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers } from '@angular/http';
+import {Repeat} from '../repeat'
 import 'rxjs/add/operator/map';
+
 
 @Injectable()
 
@@ -8,33 +10,33 @@ export class AdminService{
 
 constructor(private http: Http){}
 
-  addItem(item){
+  addRepeat(repeat:Repeat){
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post("/api/item", JSON.stringify(item), {headers: headers})
+    return this.http.post("/api/item", JSON.stringify(repeat), {headers: headers})
       .map(response => response.json());
   }
 
 
-  getItems(){
+  getRepeat(){
   return this.http.get('/api/items')
     .map(res =>res.json());
 }
 
 
-removeItem(id){
+removeRepeat(id:any){
   return this.http.delete("/api/item/"+ id)
         .map(res => res.json());
 }
 
 
-updateItem(item){
-console.log(item);
+updateRepeat(repeat:Repeat){
+
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    console.log(item);
+
     
-    return this.http.put("/api/itemup/"+item._id, JSON.stringify(item), {headers: headers})
+    return this.http.put("/api/itemup/"+repeat.id, JSON.stringify(repeat), {headers: headers})
       .map(response => response.json());
 }
 

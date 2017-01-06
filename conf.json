@@ -1,3 +1,4 @@
 {
-    "database": "mongodb://grzes:123@ds151028.mlab.com:51028/revision_course"
+    "database": "mongodb://grzes:123@ds151028.mlab.com:51028/revision_course",
+    "passwd":"qw"
 }

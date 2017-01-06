@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AdminService } from './admin.service'
+import { auth } from '../app.component'
+import {Repeat} from '../repeat'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+//import {Control} from "@angular/common"
 
 @Component({
   selector: 'admin',
@@ -7,70 +11,80 @@ import { AdminService } from './admin.service'
   templateUrl: 'admin.component.html',
       providers: [AdminService]
 })
-export class AdminComponent  { 
+export class AdminComponent implements OnInit { 
 
 
-items: Array<any> = [];
+
+repeatArr: Array<Repeat> = [];
 engPhrase: string;
-plPhrase: string;
+plPhrase:string;
 description: string;
 creationDate: Date;
-id:any;
-nextRepeat: Date;
+plAnsCount: number;
+engAnsCount: number;
+currRepeat: Repeat
 
-  constructor(private adminService: AdminService) {
-    adminService.getItems().subscribe(res => {
-      this.items = res;
+
+
+  constructor(private adminService: AdminService, private fb: FormBuilder) {}
+ngOnInit(){
+  //przy załadowaniu tworze obiekty dla kazdej wartosci z bazy i wrzucam w tablice
+    this.adminService.getRepeat().subscribe(res => {
+      for(let r of res){
+        this.repeatArr.push(new Repeat(r.engPhrase, r.plPhrase, r.description,
+                        r._id, r.plAnsCount, r.engAnsCount))
+      }
     })
+this.currRepeat = new Repeat("","","");
 }
-  addItem() {
-    if(!this.nextRepeat || this.nextRepeat == undefined){
-      this.nextRepeat = new Date();
-      console.log("if "+this.nextRepeat)
-    }
-
-    var item = {
-      engPhrase: this.engPhrase,
-      plPhrase: this.plPhrase,
-      description: this.description,
-      nextRepeat: this.nextRepeat
-    }
-
-    console.log("nr: "+this.nextRepeat);
-    // jezeli jest id to znaczy ze jestm w trybie edycji i uruchamian serwis
-    //do update, przeciwnie instert do bazy
-    if(this.id){
-      console.log("wlaz w update");
-      
-      item._id = this.id   
-      this.adminService.updateItem(item).subscribe(data => {
-      console.log(data)
-    });
-  }else{
 
 
 
-    this.adminService.addItem(item).subscribe(data => {
-      console.log(data);
-      this.items.push(item);
-    })
-  }
+  addRepeat(){
+ 
+    if(!auth){
+      if(!this.currRepeat.id){
+        this.currRepeat.id = "new";
+        this.repeatArr.push(this.currRepeat);
+        return;
+      }
+    }else{
+      if(this.currRepeat.id){   
+        this.adminService.updateRepeat(this.currRepeat).subscribe(data =>
+        console.log(data));  
+      }else{
+        
+        this.repeatArr.push(this.currRepeat);
+     //   console.log(this.currRepeat)
+        this.adminService.addRepeat(this.currRepeat).subscribe(data =>
+        this.currRepeat.id = data._id
+        )
+      }
+    } 
+    this.currRepeat = new Repeat("","")
   }
 
-
-removeItem(id){
-  this.adminService.removeItem(id)
+removeRepeat(rep:Repeat){
+//es6 funkcja zwrotna zwraca tylko to co spelnia warunek
+  this.repeatArr = this.repeatArr.filter(obj => obj.id!=rep.id);
+  this.adminService.removeRepeat(rep.id)
   .subscribe(data =>{
-    console.log("delete "+data)
+   // console.log("delete "+data)
   })
 }
-editItem(item){
-this.engPhrase = item.engPhrase;
-this.plPhrase = item.plPhrase;
-this.description = item.description;
-this.id = item._id;
+editRepeat(current:Repeat ){
+this.currRepeat = current;
 }
 
+
+saveAllChanges(){
+    for(let r of this.repeatArr){
+      console.log(r)
+      this.repeatArr[2].engPhrase = "dupaduapa"
+      this.adminService.updateRepeat(r).subscribe(data =>
+      console.log(data));  
+    }
+}
 
 
 

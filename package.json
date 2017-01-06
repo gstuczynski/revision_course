@@ -1,11 +1,10 @@
 {
-
   "name": "revision_course",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +14,19 @@
     "express": "^4.14.0",
     "mongoose": "^4.7.5",
     "morgan": "^1.7.0",
+    "node-schedule": "^1.2.0",
+    "nodemailer": "^2.7.0",
     "path": "^0.12.7"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tyskocz/revision_course.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/tyskocz/revision_course/issues"
+  },
+  "homepage": "https://github.com/tyskocz/revision_course#readme",
+  "description": ""
 }

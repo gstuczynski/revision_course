@@ -8,12 +8,16 @@ export class MainService{
 
 constructor(private http: Http){}
 
-  getItems(){
+  getRepeat(){
   return this.http.get('/api/itemsToday')
     .map(res =>res.json());
 }
 
-updateItem(item:any){
+
+
+
+
+updateItem(rep:any,id:any){
 
 
     var headers = new Headers();

@@ -12,7 +12,8 @@ var ItemSchema = new Schema({
         plPhrase: {type: String, required: true},
         description: String,
         creationDate: {type: Date, default: new Date().now},
-        nextRepeat: {type: Date, default: new Date().now}
+        plAnsCount: {type: Number, default:0},
+        engAnsCount: {type: Number, default:0}
 
 });
 

@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Model = require('../models/item.js')
-
+var conf = require('../conf')
+console.log(conf.passwd)
 
 
 
@@ -63,7 +64,6 @@ router.put('/itemup/:id', function(require, response){
   }
   if(item.nextRepeat){
     updItem.nextRepeat = item.nextRepeat;
-    console.log("updajtuje date");
   }
 
   if(updItem){
@@ -72,6 +72,7 @@ router.put('/itemup/:id', function(require, response){
       if(err){
         return response.send(err);
       }else{
+        console.log(resource);
         return response.json(resource);
       }
     })
@@ -80,7 +81,8 @@ router.put('/itemup/:id', function(require, response){
 
 
 });
-
+/*
+wcześniejsza wersja - zwracająca dane dla dzisiaj
 router.get('/itemsToday', function(require, response){
 var start = new Date();
 start.setHours(0,0,0,0);
@@ -96,25 +98,22 @@ end.setHours(23,59,59,999);
     }
   });
 });
-
-
-
-
-
-/*
-jednak logike wyboru powtorek przenoszę do MainService
-
-router.get('/item/main', function(require, response){
-var today = new Date()-1;
-Model.find({"created_on": {"$gte": new Date(2016, 12, 19), "$lt": new Date(2016, 12, 31)}}).exec(function(err, users) {
-  if (err){
-    response.send(err).status(404);
-  }else{
-    response.send(resource).status(200);
-  }
-
-})
-});
 */
+
+router.post('/passwd', function(require, response){
+  response.send(conf.passwd).status(200);
+});
+
+router.get('/itemsToday', function(require, response){
+  Model.find({}, function(err, resource){
+ // Model.find({$or: [{plAnsCount: 0}, {engAnsCount: 0}]}, function(err, resource){
+    if(err){
+      response.send(err).status(404);
+    }else{
+      response.send(resource).status(200);
+    }
+  });
+});
+
 
 module.exports = router;

@@ -1,25 +1,24 @@
 <div class="jumbotron">
-<div *ngFor="let item of items; let isFirst = first">
-<div  *ngIf=isFirst>
-  <h1>{{ item.engPhrase }}</h1>
+
+
+  <h1>{{ currRepeat.repeat }}</h1>
   <p><a class="btn btn-primary btn-lg" (click) = "showAnswear()">Pokaż odpowiedź</a></p>
     <p><a class="btn btn-primary btn-lg" (click) = "speak()">Czytaj</a></p>
-</div>
-</div>
-<div *ngIf="answered">
 
+
+<div *ngIf="answered">
   <div class="alert alert-dismissible alert-success">
-  <strong>{{ items[0].plPhrase }}</strong>
+  <strong>{{ currRepeat.plPhrase }}</strong>
   </div>
   <div class="alert alert-dismissible alert-info">
-      <strong>{{ items[0].description }}</strong>
+      <strong>{{ currRepeat.description }}</strong>
 </div>
   <p>
-    <a class="btn btn-primary btn-lg" (click) = "setNextRepeat(items[0], 10)">Wiem</a>
-      <a class="btn btn-primary btn-lg" (click) = "setNextRepeat(items[0],5)">Prawie</a>
-      <a class="btn btn-primary btn-lg" (click) = "setNextRepeat(items[0],1)">Nie wiem</a>
+    <a class="btn btn-primary btn-lg" (click) = "setNextRepeat(currRepeat, 6)">Wiem</a>
+      <a class="btn btn-primary btn-lg" (click) = "setNextRepeat(currRepeat,3)">Prawie</a>
+      <a class="btn btn-primary btn-lg" (click) = "setNextRepeat(currRepeat,0)">Nie wiem</a>
   </p>
-  </div>
+</div>
 </div>
 =
       <label for="select" class="col-lg-2 control-label">Selects</label>
