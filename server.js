@@ -60,18 +60,37 @@ app.listen(PORT, function(){
 schedule.scheduleJob('* 12 * * *', function(){
 var transporter = nodemailer.
 createTransport('smtps://tentostertotester@gmail.com:toster123@smtp.gmail.com');
-
-var msg = "Czy pamiętasz co znaczą te słówka: "
-  Model.find({$or: [{plAnsCount: 0}, {engAnsCount: 0}]}, function(err, resource){
+var msg = ""
+var pl = false;
+var eng = false;
+var plPhraseMsg = ""
+var engPhraseMsg = ""
+  Model.find({}, function(err, resource){
     for(r of resource){
-      if(r.plAnsCount==0){
-        msg+=r.plPhrase+"🐴, "
-      }else{
-        msg+=r.engPhrase+"🐴, "
+      console.log(r.plAnsCountToNext+", "+r.engAnsCountToNext)
+      if(r.plAnsCountToNext<=0){
+        console.log("wlozd");
+        pl=true;
+        plPhraseMsg+=r.plPhrase+"🐴, "
+      }
+      if(r.engAnsCountToNext<=0){
+        eng=true;
+        engPhraseMsg+=r.engPhrase+", "
       }
 
+
     }
-  })
+      if(!(pl && eng)){
+          msg = "Że niby nie ma słówek do powtórki..."
+        }else{
+            if(pl){
+              msg = "Polskie do powtórki: "+ plPhraseMsg+'<br />';
+            }
+            if(eng){
+              msg = msg+"Angielskie do powtórki: "+engPhraseMsg;
+            }
+        }
+
 var mailOptions = {
     from: '"Przypominaczka" <tentostertotester@gmail.com>', // sender address 
     to: 'stuczynski.g@gmail.com', // list of receivers 
@@ -87,6 +106,9 @@ transporter.sendMail(mailOptions, function(error, info){
     }
     console.log('Message sent: ' + info.response);
 })
+
+  })
+  
 });
 
 
@@ -99,8 +121,8 @@ schedule.scheduleJob('* 0 * * *', function(){
       console.log("Erron on find All i schedule")
     }else{
       for(r of resource){
-        r.plAnsCount = r.plAnsCount+1;
-        r.engAnsCount = r.engAnsCount+1;
+        r.plAnsCountToNext = r.plAnsCountToNext-1;
+        r.plAnsCountToNext = r.plAnsCountToNext-1;
         Model.update({_id: r._id},r, function(err, resource){
         if(err){
            console.log("Erron on update in schedule")
