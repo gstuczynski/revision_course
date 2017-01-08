@@ -11,7 +11,7 @@
   <strong>{{ currRepeat.answear }}</strong>
   </div>
   <div class="alert alert-dismissible alert-info">
-      <strong>{{ currRepeat.description }}</strong>
+      <strong>{{ currRepeat.desc }}</strong>
 </div>
   <p>
     <a class="btn btn-primary btn-lg" (click) = "UpdateAndSetNext('known')">Wiem</a>
@@ -23,7 +23,7 @@
       <label for="select" class="col-lg-2 control-label">Selects</label>
       <div class="col-lg-10">
         <select class="form-control" id="select" (change)="onChangeVoice($event.target.value)">
-          <option *ngFor="let voice of voices; let i = index">
+          <option *ngFor="let voice of voices; let i = index" [selected]="voice.name == 'Google UK English Female'">
             {{voice.name}}</option>
         </select> 
         </div>

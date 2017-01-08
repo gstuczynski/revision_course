@@ -43,22 +43,24 @@ this.currRepeat = new Repeat("","","");
   addRepeat(){
  
     if(!auth){
-      if(!this.currRepeat.id){
-        this.currRepeat.id = "new";
+      if(!this.currRepeat._id){
+       // this.currRepeat._id = "new";
         this.repeatArr.push(this.currRepeat);
         return;
       }
     }else{
-      if(this.currRepeat.id){   
+      if(this.currRepeat._id){ 
+        console.log(this.currRepeat._id+"jest id")  
         this.adminService.updateRepeat(this.currRepeat).subscribe(data =>
         console.log(data));  
       }else{
         
-        this.repeatArr.push(this.currRepeat);
+        
      //   console.log(this.currRepeat)
         this.adminService.addRepeat(this.currRepeat).subscribe(data =>
-        this.currRepeat.id = data._id
+        this.currRepeat._id = data._id
         )
+        this.repeatArr.push(this.currRepeat);
       }
     } 
     this.currRepeat = new Repeat("","")
@@ -66,8 +68,8 @@ this.currRepeat = new Repeat("","","");
 
 removeRepeat(rep:Repeat){
 //es6 funkcja zwrotna zwraca tylko to co spelnia warunek
-  this.repeatArr = this.repeatArr.filter(obj => obj.id!=rep.id);
-  this.adminService.removeRepeat(rep.id)
+  this.repeatArr = this.repeatArr.filter(obj => obj._id!=rep._id);
+  this.adminService.removeRepeat(rep._id)
   .subscribe(data =>{
    // console.log("delete "+data)
   })

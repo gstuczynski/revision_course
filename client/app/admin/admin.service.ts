@@ -36,7 +36,7 @@ updateRepeat(repeat:Repeat){
     headers.append('Content-Type', 'application/json');
 
     
-    return this.http.put("/api/itemup/"+repeat.id, JSON.stringify(repeat), {headers: headers})
+    return this.http.put("/api/itemup/"+repeat._id, JSON.stringify(repeat), {headers: headers})
       .map(response => response.json());
 }
 

@@ -24,8 +24,7 @@ auth: boolean = false;
 
 synth = window.speechSynthesis;
 voices=window.speechSynthesis.getVoices()
-selectedVoice :any;
-
+selectedVoice : any;
   constructor(private mainService: MainService, http:Http) {
 
     mainService.getRepeat().subscribe(res => {
@@ -166,11 +165,11 @@ class CurrentRepeat{
     this.lang = lang;
     this.id = repObj._id;
     this.desc = repObj.description;
-    if(lang ="ENG"){
+    if(lang ==="ENG"){
           this.repeat=repObj.engPhrase
           this.answear=repObj.plPhrase
           this.goodAnsCount=repObj.plGoodAnsCount || 0
-    }else if(lang = "PL"){
+    }else if(lang === "PL"){
           this.repeat=repObj.plPhrase
           this.answear=repObj.engPhrase
           this.goodAnsCount=repObj.engGoodAnsCount || 0

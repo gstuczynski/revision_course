@@ -1,9 +1,9 @@
 const PORT = 3000 || process.env.PORT;
 
-const DB = "mongodb://localhost/pr3";
+//const DB = "mongodb://localhost/pr3";
 const conf = require("./conf");
 var schedule = require('node-schedule');
-//const DB = conf.database;
+const DB = conf.database;
 var Model = require('./models/item.js')
 
 var nodemailer = require('nodemailer');
