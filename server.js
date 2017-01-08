@@ -57,7 +57,7 @@ app.listen(PORT, function(){
 });
 
 //mailing
-schedule.scheduleJob('* 12 * * *', function(){
+schedule.scheduleJob('0 12 * * *', function(){
 var transporter = nodemailer.
 createTransport('smtps://tentostertotester@gmail.com:toster123@smtp.gmail.com');
 var msg = ""
@@ -69,7 +69,7 @@ var engPhraseMsg = ""
     for(r of resource){
       console.log(r.plAnsCountToNext+", "+r.engAnsCountToNext)
       if(r.plAnsCountToNext<=0){
-        console.log("wlozd");
+        
         pl=true;
         plPhraseMsg+=r.plPhrase+"🐴, "
       }
@@ -115,7 +115,7 @@ transporter.sendMail(mailOptions, function(error, info){
 
 //codziennie zmiejszam ilosc dni do powtorki, odzielnie po polsku i angielsku
 
-schedule.scheduleJob('* 0 * * *', function(){
+schedule.scheduleJob('0 0 * * *', function(){
     Model.find({}, function(err, resource){
     if(err){
       console.log("Erron on find All i schedule")
